@@ -131,13 +131,13 @@ def update_patient(patient_id: str , patient_update = PatientUpdate):
     
     existing_patient_info = data[patient_id]
 
-    updated_patient_info = patient_update.model_dump(exclude_unset = True)
+    updated_patient_info = patient_update.model_dump(exclude_unset = True)  #that part we want to update , converts a Pydantic model object into a Python dictionary.
 
     for key,value in updated_patient_info.items():
         existing_patient_info[key] = value
 
-    existing_patient_info['id'] = patient_id = patient_id
-    patient_pydantic_obj = Patient(**existing_patient_info)
+    existing_patient_info['id'] = patient_id 
+    patient_pydantic_obj = Patient(**existing_patient_info)  #This creates a Pydantic object.It checks whether the updated data is valid.
 
     existing_patient_info = patient_pydantic_obj.model_dump(exclude ='id')
 
